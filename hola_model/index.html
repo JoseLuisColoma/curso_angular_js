@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="MyFirstApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hola Mundo con AngularJS</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+    <script src="controller.js"></script>
+</head>
+
+<body>
+
+    <!-- Primer controlador -->
+    <div ng-controller="HolaController">
+        <h1>{{ "Hola " + nombre }}</h1>
+        <p>¡Bienvenido a tu primera página web!</p>
+    </div>
+
+    <!-- Segundo controlador -->
+    <div ng-controller="AdiosController">
+        <h1>{{ nombre }}</h1>
+    </div>
+
+    <!-- Tercer bloque reutilizando HolaController -->
+    <div ng-controller="HolaController">
+        <input type="text" ng-model="nuevoComentario" placeholder="Escribe un comentario">
+        <input type="text" ng-model="nuevoTexto" placeholder="Escribe el texto del comentario">
+        <button ng-click="agregarComentario()">Agregar Comentario</button>
+        <h3>Comentarios:</h3>
+        <ul>
+            <li ng-repeat="comentario in comentarios">
+                {{ comentario.comentario }} -
+                <strong>{{ comentario.autor }}</strong> -
+                <em>{{ comentario.fecha | date:'short' }}</em> -
+                <span>{{ comentario.texto }}</span>
+                <br>
+
+                <button ng-click="comentario.likes = comentario.likes + 1">Me gusta</button>
+                <span>{{ comentario.likes }}</span>
+                <br><br>
+            </li>
+            <li ng-if="comentarios.length === 0">No hay comentarios aún.</li>
+        </ul>
+    </div>
+
+</body>
+
+</html>
